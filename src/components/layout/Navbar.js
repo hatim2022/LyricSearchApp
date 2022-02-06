@@ -1,6 +1,4 @@
 import React from 'react';
-import Router  from 'react-router-dom';
-
 const Navbar = () => {
   return (
   <nav className='navbar navbar-dark bg-dark mb-5'>

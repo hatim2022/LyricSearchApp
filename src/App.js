@@ -1,17 +1,29 @@
+import {BrowserRouter as Router, Route, Switch }  from 'react-router-dom';
+import React, { Component } from 'react';
 import Navbar from './components/layout/Navbar';
-import {BrowserRouter as Router,Route,Switch}  from 'react-router-dom';
+import Index from './components/layout/Index';
+import Lyrics from './components/tracks/Lyrics';
+
+import { Provider } from './context'
 import './App.css';
-import { Component } from 'react';
- 
+
 
 class App extends Component {
   render(){
     return(
+      <Provider>
       <Router>
-      <div className='App'>
-      <Navbar/>
-      </div>
+      <React.Fragment>
+       <Navbar/>
+       <div className="container">
+         <Switch>
+           <Route exact path='/' component={Index}/>
+           <Route exact path='/lyrics/track/:id' component={Lyrics}/>
+         </Switch>
+       </div>
+      </React.Fragment>
       </Router>
+      </Provider>
     );
   }
 }
