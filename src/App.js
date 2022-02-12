@@ -6,6 +6,7 @@ import Lyrics from './components/tracks/Lyrics';
 
 import { Provider } from './context'
 import './App.css';
+import login from './components/login/login';
 
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
        <Navbar/>
        <div className="container">
          <Switch>
+           <Route exact path='/login' component={login}/>
            <Route exact path='/' component={Index}/>
            <Route exact path='/lyrics/track/:id' component={Lyrics}/>
          </Switch>

@@ -10,13 +10,13 @@ const Track = (props) => {
            <div className='card-body'>
              <h5 className="fifty-chars">{track.artist_name}</h5>
              <p className="card-text">
-              <strong><i className="fas fa-play"></i> Track</strong>: 
-               {track.track_name} 
+              <strong><i className="fas fa-play"></i> Track : </strong> 
+               {track.name} 
               <br/>
-              <strong><i className="fas fa-compact-disc"></i> Album</strong>:
+              <strong><i className="fas fa-compact-disc"></i> Album : </strong> 
               {track.album_name}
              </p>
-             <Link to={`lyrics/track/${track.track_id}`} className="btn btn-dark btn-block btn-full-width">
+             <Link to={`lyrics/track/${track.id}`} className="btn btn-dark btn-block btn-full-width">
               <i className='fas fa-chevron-right'></i> View Lyrics
              </Link>
            </div>

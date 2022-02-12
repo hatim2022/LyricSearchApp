@@ -10,15 +10,20 @@ state = {
 
 findTrack = (dispatch,e) => {
   e.preventDefault();
-  axios.get(`https://cors-access-allow.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.search?q_track=${this.state.trackTitle}&page_size=10&page=1&s_track_rating=desc&apikey=${process.env.REACT_APP_MM_KEY}`)
-  .then(res => { 
-      dispatch({
-        type: 'SEARCH_TRACKS',
-        payload: res.data.message.body.track_list
-      });
-      this.setState({track_list: res.data.message.body.track_list}); 
-     })
-  .catch(err => console.log(err));
+
+  axios.post('http://localhost:8080/api/tracks', {
+    name: this.state.trackTitle
+  })
+  .then((res) => {
+    console.log(res.data)
+    dispatch({
+      type: 'SEARCH_TRACKS',
+      payload: res.data
+    });
+    this.setState({track_list: res.data}); 
+   })
+.catch(err => console.log(err)) 
+
 }
 
 onChange(e){
