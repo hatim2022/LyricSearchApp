@@ -11,15 +11,15 @@ state = {
 };
 
 componentDidMount(){
-  axios.get(`https://cors-access-allow.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${this.props.match.params.id}&apikey=${process.env.REACT_APP_MM_KEY}`)
+  axios.get(`http://localhost:8080/api/track/${this.props.match.params.id}`)
   .then(res => { 
-     this.setState({lyrics: res.data.message.body.lyrics}); 
+     this.setState({lyrics: res.data.lyrics}); 
 
-     return axios.get(`https://cors-access-allow.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.get?track_id=${this.props.match.params.id}&apikey=${process.env.REACT_APP_MM_KEY}`);
+     return axios.get(`http://localhost:8080/api/track/${this.props.match.params.id}`);
      })
      .then(res => {
-       this.setState({track: res.data.message.body.track});
-       console.log(res.data.message.body.track)
+       this.setState({track: res.data});
+       console.log(res.data)
      })
   .catch(err => console.log(err))
 }
@@ -43,30 +43,14 @@ componentDidMount(){
         <span className="text-secondary">{track.artist_name}</span>
       </h5>
       <div className="card-body">
-        <p className="card-text">{lyrics.lyrics_body}</p>
+        <p className="card-text">{lyrics}</p>
       </div>
      </div>
      
       <ul className="list-group mt-3">
        <li className="list-group-item">
-        <strong> Album ID</strong>: {track.album_id}
+        <strong> Album Name </strong>: {track.album_name}
        </li>
-       <li className="list-group-item">
-        <strong> Song Genre</strong>: {
-          track.primary_genres.music_genre_list[0]
-        .music_genre.music_genre_name
-        }
-       </li>
-      <li className="list-group-item">
-       <strong>Explicit Words</strong>:{' '}
-       {track.explicit === 0 ? 'No' : 'Yes'}
-      </li>
-      <li className="list-group-item">
-      <strong>Updated Time</strong>:{' '}
-      <Moment format="MM/DD/YYYY">
-      {track.updated_time}
-      </Moment>
-      </li>
       </ul>
      </React.Fragment>
      );

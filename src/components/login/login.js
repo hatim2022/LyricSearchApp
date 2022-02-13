@@ -1,11 +1,48 @@
+import axios from 'axios';
 import react from 'react';
 import React, { Component } from 'react';
 
 export default class login extends Component {
 
-login(e){
-  e.preventDefault();
-  
+  state = {
+    email : "",
+    password : ""
+  }
+
+login(event){
+  event.preventDefault(); 
+  axios.post('http://localhost:8080/api/users', {
+    email: this.state.email,
+    password: this.state.password
+  })
+  .then((res) => {
+    if(res.status== 200 ){
+      let url=window.location.href;
+      url = url.replace("login","home");
+      console.log(url)
+      window.location.replace(url);
+    }
+
+  })
+  .catch(
+    err => {
+      console.log(err)
+    }
+  )
+}
+
+onChange(e){
+  if(e.target.name=="email"){
+   this.setState({
+     email:e.target.value,
+     password:this.state.password
+   })
+  }else{
+    this.setState({
+      email:this.state.email,
+      password:e.target.value
+    })
+  }
 }
 
   render() {
@@ -17,14 +54,27 @@ login(e){
           <div className="card border-0 shadow rounded-3 my-5">
             <div className="card-body p-4 p-sm-5">
               <h5 className="card-title text-center mb-5 fw-light fs-5">Welcome</h5>
-              <form onSubmit={this.login(this)}>
+              <form onSubmit={this.login.bind(this)}>
                 <div className="form-floating mb-3">
-                  <input  name="email" className="form-control" placeholder="Email Address"/>
-                  <label for="floatingInput">Email</label>
+                  <input  
+                  name="email"
+                  value={this.state.email} 
+                  className="form-control" 
+                  placeholder="Email Address"
+                  onChange={this.onChange.bind(this)}
+                  />
+                  <label htmlFor="floatingInput">Email</label>
                 </div>
                 <div className="form-floating mb-3">
-                  <input name="password" type="password" class="form-control" placeholder="password"/>
-                  <label for="floatingPassword">Password</label>
+                  <input 
+                  name="password"
+                  value={this.state.password} 
+                  type="password" 
+                  className="form-control" 
+                  placeholder="password"
+                  onChange={this.onChange.bind(this)}   
+                  />
+                  <label htmlFor="floatingPassword">Password</label>
                 </div>
                 <div className="d-grid">
                   <button className="btn btn-primary btn-login text-uppercase fw-bold" type="submit" >Sign in</button>
@@ -33,7 +83,7 @@ login(e){
             </div><br/>
 
             <div className="d-grid">
-              <a href="/create" class="btn btn-primary btn-login text-uppercase fw-bold">Create Account</a>
+              <a href="/create" className="btn btn-primary btn-login text-uppercase fw-bold">Create Account</a>
             </div>
           </div>
         </div>
