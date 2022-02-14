@@ -34,7 +34,7 @@ componentDidMount(){
     }else{
      return (
      <React.Fragment>
-     <Link to="/" className="btn btn-dark btn-sm mb-4">
+     <Link to="/home" className="btn btn-dark btn-sm mb-4">
         Go Back
      </Link>
      <div className='card'>

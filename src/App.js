@@ -7,6 +7,7 @@ import Lyrics from './components/tracks/Lyrics';
 import { Provider } from './context'
 import './App.css';
 import login from './components/login/login';
+import registration from './components/login/registration';
 
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
            <Route exact path='/login' component={login}/>
            <Route exact path='/home' component={Index}/>
            <Route exact path='/lyrics/track/:id' component={Lyrics}/>
+           <Route exact path='/create' component={registration}/>
          </Switch>
        </div>
       </React.Fragment>
