@@ -1,26 +1,41 @@
 import axios from 'axios';
 import react from 'react';
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 export default class login extends Component {
 
   state = {
-    email : "",
-    password : ""
+    user:{email:"",password:""},
+    login:false
+  }
+
+componentDidMount(){
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      this.setState({
+        user:loggedInUser,
+        login:true
+      })
+    }
   }
 
 login(event){
   event.preventDefault(); 
   axios.post('http://localhost:8080/api/users', {
-    email: this.state.email,
-    password: this.state.password
+    email: this.state.user.email,
+    password: this.state.user.password
   })
   .then((res) => {
     if(res.status== 200 ){
-      let url=window.location.href;
-      url = url.replace("login","home");
-      console.log(url)
-      window.location.replace(url);
+      this.setState({
+        user:{
+          email:res.data.email,
+          password:res.data.password
+        }
+      })
+     localStorage.setItem('user',this.state.user);
+      window.location.replace(window.location.href.replace("login","home"));
     }
 
   })
@@ -33,21 +48,32 @@ login(event){
 
 onChange(e){
   if(e.target.name=="email"){
-   this.setState({
-     email:e.target.value,
-     password:this.state.password
-   })
+    this.setState({
+     user:{
+       email:e.target.value,
+       password:this.state.user.password
+     }
+    })
+    
   }else{
     this.setState({
-      email:this.state.email,
-      password:e.target.value
+      user:{
+        email:this.state.user.email,
+        password:e.target.value
+      }
     })
   }
 }
 
-  render() {
-    return (
 
+
+  render() {
+
+    if(this.state.login){
+      return <Redirect to='/home'  />
+    } 
+    else{
+    return (
     <react.Fragment>
      <div className="row">
         <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -91,5 +117,6 @@ onChange(e){
     </react.Fragment>
 
     )
+    }
   }
 }
