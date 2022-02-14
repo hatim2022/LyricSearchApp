@@ -1,6 +1,6 @@
 import axios from 'axios';
 import react from 'react';
-import React, { Component } from 'react';
+import React, { Component , useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 export default class login extends Component {
@@ -84,7 +84,8 @@ onChange(e){
                 <div className="form-floating mb-3">
                   <input  
                   name="email"
-                  value={this.state.email} 
+                  id="email"
+                  value={this.state.user.email} 
                   className="form-control" 
                   placeholder="Email Address"
                   onChange={this.onChange.bind(this)}
@@ -94,7 +95,8 @@ onChange(e){
                 <div className="form-floating mb-3">
                   <input 
                   name="password"
-                  value={this.state.password} 
+                  id="password"
+                  value={this.state.user.password} 
                   type="password" 
                   className="form-control" 
                   placeholder="password"
