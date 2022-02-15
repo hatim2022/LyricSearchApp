@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route, Switch }  from 'react-router-dom';
+import {BrowserRouter as Router, Redirect, Route, Switch }  from 'react-router-dom';
 import React, { Component } from 'react';
 import Navbar from './components/layout/Navbar';
 import Index from './components/layout/Index';
@@ -23,6 +23,9 @@ class App extends Component {
            <Route exact path='/home' component={Index}/>
            <Route exact path='/lyrics/track/:id' component={Lyrics}/>
            <Route exact path='/create' component={registration}/>
+           <Route exact path="/">
+                <Redirect to="/home" />
+         </Route>
          </Switch>
        </div>
       </React.Fragment>
