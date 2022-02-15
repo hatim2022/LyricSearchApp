@@ -105,7 +105,7 @@ onChange(e){
                   <label htmlFor="floatingPassword">Password</label>
                 </div>
                 <div className="d-grid">
-                  <button className="btn btn-primary btn-login text-uppercase fw-bold" type="submit" >Sign in</button>
+                  <button className="btn btn-primary btn-login text-uppercase fw-bold"  type="submit" >Sign in</button>
                 </div>
               </form>
             </div><br/>

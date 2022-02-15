@@ -10,6 +10,7 @@ state = {
   lyrics:{}
 };
 
+
 componentDidMount(){
   axios.get(`http://localhost:8080/api/track/${this.props.match.params.id}`)
   .then(res => { 
@@ -52,6 +53,18 @@ componentDidMount(){
         <strong> Album Name </strong>: {track.album_name}
        </li>
       </ul>
+
+      <ul className="list-group mt-3">
+       <li className="list-group-item">
+       <p>Play the Song :</p>
+        <audio controls>
+        <source src="https://www.mediafire.com/file/b92sgklzgg0jymx/Make_Your_Own_Kind_Of_Music.mp3" />
+        </audio>
+       </li>
+      </ul>
+
+
+     
      </React.Fragment>
      );
     }
